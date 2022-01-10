@@ -62,17 +62,9 @@ const SignatureModal = () => {
   const createSignature = async () => {
     if (!(await signatureTool.isEmptySignature())) {
       signatureTool.saveSignatures(signatureTool.annot);
-
       dispatch(actions.setSelectedDisplayedSignatureIndex(displayedSignatures.length));
-      core.setToolMode('AnnotationCreateSignature');
-
-      if (signatureTool.hasLocation()) {
-        await signatureTool.addSignature();
-      } else {
-        await signatureTool.showPreview();
-      }
-      dispatch(actions.closeElement('signatureModal'));
     }
+    console.log(signatureTool.getSavedSignatures());
   };
 
   const modalClass = classNames({

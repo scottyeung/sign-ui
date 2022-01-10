@@ -160,8 +160,8 @@ if (window.CanvasRenderingContext2D) {
 
   setupDocViewer();
   setupI18n(state);
-  setUserPermission(state);
-  setAutoSwitch();
+  // setUserPermission(state);
+  // setAutoSwitch();
   setDefaultToolStyles();
   core.setToolMode(defaultTool);
 

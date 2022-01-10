@@ -1,5 +1,3 @@
-import { setCheckPasswordFunction } from 'components/PasswordModal';
-
 import core from 'core';
 import { fireError } from 'helpers/fireEvent';
 import getHashParams from 'helpers/getHashParams';
@@ -64,9 +62,6 @@ const transformPasswordOption = (password, dispatch) => {
           'Wrong password has been passed as an argument. WebViewer will open password modal.',
         );
       }
-
-      setCheckPasswordFunction(checkPassword);
-      dispatch(actions.openElement('passwordModal'));
     }
   };
 };
