@@ -1,6 +1,6 @@
 # WebViewer UI - v8.2
 
-#TODO
+# TODO
 1. Remove Upload tab and ColorPalette
 2. Assign a blank PDF to initialize
 
