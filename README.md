@@ -4,6 +4,7 @@
 1. Remove Upload tab and ColorPalette
 2. Assign a blank PDF to initialize
 3. Survey a better way to import
+4. Use eventListener to detect when signature is created
 
 WebViewer UI sits on top of [WebViewer](https://www.pdftron.com/webviewer), a powerful JavaScript-based PDF Library that's part of the [PDFTron PDF SDK](https://www.pdftron.com). Built in React, WebViewer UI provides a slick out-of-the-box responsive UI that interacts with the core library to view, annotate and manipulate PDFs that can be embedded into any web project.
 
