@@ -19,14 +19,14 @@ import defaultTool from 'constants/defaultTool';
 import getBackendPromise from 'helpers/getBackendPromise';
 import loadCustomCSS from 'helpers/loadCustomCSS';
 import loadScript, { loadConfig } from 'helpers/loadScript';
-import setupLoadAnnotationsFromServer from 'helpers/setupLoadAnnotationsFromServer';
+// import setupLoadAnnotationsFromServer from 'helpers/setupLoadAnnotationsFromServer';
 import eventHandler from 'helpers/eventHandler';
 import setupI18n from 'helpers/setupI18n';
-import setAutoSwitch from 'helpers/setAutoSwitch';
+// import setAutoSwitch from 'helpers/setAutoSwitch';
 import setDefaultDisabledElements from 'helpers/setDefaultDisabledElements';
 import setupDocViewer from 'helpers/setupDocViewer';
 import setDefaultToolStyles from 'helpers/setDefaultToolStyles';
-import setUserPermission from 'helpers/setUserPermission';
+// import setUserPermission from 'helpers/setUserPermission';
 import logDebugInfo from 'helpers/logDebugInfo';
 import rootReducer from 'reducers/rootReducer';
 import { persistStore } from 'redux-persist';
@@ -163,7 +163,7 @@ if (window.CanvasRenderingContext2D) {
   // setUserPermission(state);
   // setAutoSwitch();
   setDefaultToolStyles();
-  core.setToolMode(defaultTool);
+  core.setToolMode('AnnotationCreateSignature');
 
   fullAPIReady.then(() => loadConfig()).then(() => {
     if (preloadWorker) {
@@ -176,7 +176,6 @@ if (window.CanvasRenderingContext2D) {
       tool?.setSaveViewState(true);
     }
 
-    setupLoadAnnotationsFromServer(store);
     addEventHandlers();
     ReactDOM.render(
       <Provider store={store}>

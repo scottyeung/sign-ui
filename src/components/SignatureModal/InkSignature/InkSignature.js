@@ -117,7 +117,7 @@ const InkSignature = ({
 
   return (
     <React.Fragment>
-      <ColorPalette
+      {/* <ColorPalette
         color={toolStyles['StrokeColor']}
         property="StrokeColor"
         onStyleChange={(property, value) => {
@@ -131,7 +131,7 @@ const InkSignature = ({
           forceUpdate();
         }}
         overridePalette2={['#E44234', '#4E7DE9', '#000000']}
-      />
+      /> */}
       <div
         className="divider-horizontal"
       />
