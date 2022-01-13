@@ -104,12 +104,6 @@ const SignatureModal = () => {
                     {t('action.type')}
                   </button>
                 </Tab>
-                <div className="tab-options-divider" />
-                <Tab dataElement="imageSignaturePanelButton">
-                  <button className="tab-options-button">
-                    {t('action.upload')}
-                  </button>
-                </Tab>
               </div>
               <TabPanel dataElement="inkSignaturePanel">
                 <InkSignature
@@ -119,12 +113,6 @@ const SignatureModal = () => {
               </TabPanel>
               <TabPanel dataElement="textSignaturePanel">
                 <TextSignature
-                  isModalOpen={isOpen}
-                  createSignature={createSignature}
-                />
-              </TabPanel>
-              <TabPanel dataElement="imageSignaturePanel">
-                <ImageSignature
                   isModalOpen={isOpen}
                   createSignature={createSignature}
                 />

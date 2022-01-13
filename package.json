@@ -14,6 +14,7 @@
     "lint:fix": "eslint --fix ./src/**/*.js",
     "clean": "rimraf build",
     "bundle": "webpack --progress --config ./webpack.config.prod.js",
+    "bundle-size": "webpack --profile --json > stats.json",
     "build": "npm run clean && npm run bundle",
     "translation": "node ./scripts/translate-i18n-files.js",
     "storybook": "start-storybook -s ../../build -p 6006 --ci",

@@ -35,6 +35,8 @@ const App = ({ removeEventHandlers }) => {
   useEffect(() => {
     fireEvent(Events.VIEWER_LOADED);
 
+    // const doc = window.PDFNet.PDFDoc.create();
+
     function loadInitialDocument() {
       const doesAutoLoad = getHashParams('auto_load', true);
       const initialDoc = getHashParams('d', '');
@@ -77,22 +79,6 @@ const App = ({ removeEventHandlers }) => {
 
     return removeEventHandlers;
     // eslint-disable-next-line
-  }, []);
-
-  useEffect(() => {
-    const setTabletState = () => {
-      // TODO: Use constants
-      dispatch(actions.setLeftPanelWidth(251));
-      dispatch(actions.setNotesPanelWidth(293));
-      dispatch(actions.setSearchPanelWidth(293));
-    };
-
-    const onBreakpoint = () => {
-      if (tabletBreakpoint.matches) {
-        setTabletState();
-      }
-    };
-    tabletBreakpoint.addListener(onBreakpoint);
   }, []);
 
   return (
