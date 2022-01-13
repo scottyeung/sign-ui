@@ -4,20 +4,18 @@ import classNames from 'classnames';
 import { useStore, useDispatch, useSelector } from 'react-redux';
 import PropTypes from 'prop-types';
 import selectors from 'selectors';
+import DocumentContainer from 'components/DocumentContainer';
 import SignatureModal from 'components/SignatureModal';
-
 import loadDocument from 'helpers/loadDocument';
 import getHashParams from 'helpers/getHashParams';
 import fireEvent from 'helpers/fireEvent';
 import Events from 'constants/events';
-import overlays from 'constants/overlays';
 
 import actions from 'actions';
 
 import './App.scss';
 
 // TODO: Use constants
-const tabletBreakpoint = window.matchMedia('(min-width: 641px) and (max-width: 900px)');
 
 const propTypes = {
   removeEventHandlers: PropTypes.func.isRequired,
@@ -35,8 +33,6 @@ const App = ({ removeEventHandlers }) => {
   useEffect(() => {
     fireEvent(Events.VIEWER_LOADED);
 
-    // const doc = window.PDFNet.PDFDoc.create();
-
     function loadInitialDocument() {
       const doesAutoLoad = getHashParams('auto_load', true);
       const initialDoc = getHashParams('d', '');
@@ -53,11 +49,17 @@ const App = ({ removeEventHandlers }) => {
         loadDocument(dispatch, initialDoc, options);
       }
     }
+       
+    function createSignatureModal() {
+      dispatch(actions.openElement('signatureModal'));
+      dispatch(actions.closeElement('toolStylePopup'));
+    }
 
-    function loadDocumentAndCleanup() {
-      loadInitialDocument();
+    async function loadDocumentAndCleanup() {
+      await loadInitialDocument();
       window.removeEventListener('message', messageHandler);
-      clearTimeout(timeoutReturn);
+      await clearTimeout(timeoutReturn);
+      createSignatureModal();
     }
 
     function messageHandler(event) {
@@ -68,11 +70,9 @@ const App = ({ removeEventHandlers }) => {
       }
     }
 
-    window.addEventListener('blur', () => { dispatch(actions.closeElements(overlays)); });
+    // window.addEventListener('blur', () => { dispatch(actions.closeElements(overlays)); });
     window.addEventListener('message', messageHandler, false);
 
-    dispatch(actions.openElement('signatureModal'));
-    dispatch(actions.closeElement('toolStylePopup'));
     // In case WV is used outside of iframe, postMessage will not
     // receive the message, and this timeout will trigger loadInitialDocument
     timeoutReturn = setTimeout(loadDocumentAndCleanup, 100);
@@ -84,6 +84,9 @@ const App = ({ removeEventHandlers }) => {
   return (
     <React.Fragment>
       <div className={classNames({ "App": true, 'is-in-desktop-only-mode': isInDesktopOnlyMode })}>
+        <div className="content">
+          <DocumentContainer />
+        </div>
         <SignatureModal />
       </div>
     </React.Fragment>

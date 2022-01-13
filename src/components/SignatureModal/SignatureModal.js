@@ -7,7 +7,6 @@ import { FocusTrap } from '@pdftron/webviewer-react-toolkit';
 import { Tabs, Tab, TabPanel } from 'components/Tabs';
 import InkSignature from 'components/SignatureModal/InkSignature';
 import TextSignature from 'components/SignatureModal/TextSignature';
-import ImageSignature from 'components/SignatureModal/ImageSignature';
 
 import core from 'core';
 import actions from 'actions';
@@ -22,20 +21,10 @@ const SignatureModal = () => {
     selectors.getActiveToolName(state),
     selectors.getDisplayedSignatures(state),
   ]);
+  
+  const verificationResult = useSelector(state => selectors.getVerificationResult(state, name));
 
   const signatureTool = core.getTool('AnnotationCreateSignature');
-
-  // Hack to close modal if hotkey to open other tool is used.
-  useEffect(() => {
-    if (activeToolName !== 'AnnotationCreateSignature') {
-      dispatch(
-        actions.closeElements([
-          'signatureModal',
-          'signatureOverlay',
-        ]),
-      );
-    }
-  }, [dispatch, activeToolName]);
 
   const dispatch = useDispatch();
   const [t] = useTranslation();
@@ -50,7 +39,7 @@ const SignatureModal = () => {
           'errorModal',
         ]),
       );
-    }
+    }    
   }, [dispatch, isOpen]);
 
   const closeModal = () => {
@@ -64,7 +53,6 @@ const SignatureModal = () => {
       signatureTool.saveSignatures(signatureTool.annot);
       dispatch(actions.setSelectedDisplayedSignatureIndex(displayedSignatures.length));
     }
-    console.log(signatureTool.getSavedSignatures());
   };
 
   const modalClass = classNames({

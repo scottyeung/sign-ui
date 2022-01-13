@@ -35,7 +35,6 @@ import getHashParams from 'helpers/getHashParams';
 import defineWebViewerInstanceUIAPIs from 'src/apis';
 
 import './index.scss';
-import hotkeysManager from './helpers/hotkeysManager';
 
 const middleware = [thunk];
 
@@ -156,12 +155,10 @@ if (window.CanvasRenderingContext2D) {
   const documentViewer = new window.Core.DocumentViewer();
   window.documentViewer = documentViewer;
   defineWebViewerInstanceUIAPIs(store);
-  hotkeysManager.initialize(store);
 
   setupDocViewer();
   setupI18n(state);
-  // setUserPermission(state);
-  // setAutoSwitch();
+
   setDefaultToolStyles();
   core.setToolMode('AnnotationCreateSignature');
 
